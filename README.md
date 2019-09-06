@@ -51,3 +51,11 @@ From your terminal application, execute the following command:
 ```console
 git push AWSCodeCommit master
 ```
+
+#### 5. Run the script to generate the Cross Account Pipeline
+
+From your terminal application, execute the following command:
+
+```console
+chmod +x single-click-cross-account-pipeline.sh && ./single-click-cross-account-pipeline.sh
+```
