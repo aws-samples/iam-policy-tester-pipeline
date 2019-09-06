@@ -90,6 +90,7 @@ Resources:
               - lambda:GetFunctionConfiguration
               - lambda:GetFunction
               - lambda:UpdateFunctionConfiguration
+              - apigateway:*
               - events:* # Required for the sample lambda function to work
               - iam:CreateRole
               - iam:CreatePolicy
@@ -98,6 +99,8 @@ Resources:
               - iam:PutRolePolicy
               - iam:PassRole
               - iam:DeleteRolePolicy
+              - iam:DetachRolePolicy
+              - iam:AttachRolePolicy
               - cloudformation:*
             Resource: "*"
           -

@@ -1,20 +1,28 @@
 #!/usr/bin/env bash
 echo -n "Enter ToolsAccount > "
 read ToolsAccount
+#168260405049
 echo -n "Enter ToolsAccount ProfileName for AWS Cli operations> "
 read ToolsAccountProfile
+#iampolicytester
 echo -n "Enter Dev Account > "
 read DevAccount
+#168260405049
 echo -n "Enter DevAccount ProfileName for AWS Cli operations> "
 read DevAccountProfile
+#iampolicytester
 echo -n "Enter Test Account > "
 read TestAccount
+#168260405049
 echo -n "Enter TestAccount ProfileName for AWS Cli operations> "
 read TestAccountProfile
+#iampolicytester
 echo -n "Enter Prod Account > "
 read ProdAccount
+#688437181797
 echo -n "Enter ProdAccount ProfileName for AWS Cli operations> "
 read ProdAccountProfile
+#iampolicytesterprod
 
 aws cloudformation deploy --stack-name pre-reqs --template-file ToolsAcct/pre-reqs.yaml --parameter-overrides DevAccount=$DevAccount TestAccount=$TestAccount ProductionAccount=$ProdAccount --profile $ToolsAccountProfile
 echo -n "Enter S3 Bucket created from above > "
