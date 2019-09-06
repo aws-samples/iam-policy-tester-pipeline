@@ -1,28 +1,26 @@
-# Reference Architecture: Cross Account AWS CodePipeline
+# Cross Account AWS CodePipeline for IAM Policy Tester
 
-This reference architecture demonstrates how to push code hosted in [AWS CodeCommit](code-commit-url) repository in Development Account,
-use [AWS CodeBuild](code-build-url) to do application build, store the output artifacts in S3Bucket and deploy these artifacts to Test
-and Production Accounts using [AWS CloudFormation](clouformation-url). This orchestration of code movement from code checkin to deployment
-is securely handled by [AWS CodePipeline](code-pipeline-url).
+This reference architecture demonstrates how to push code hosted in [AWS CodeCommit](https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda) repository in Development Account,
+use **AWS CodeBuild** to do application build, store the output artifacts in S3Bucket and deploy these artifacts to Test
+and Production Accounts using **AWS CloudFormation**. This orchestration of code movement from code checkin to deployment
+is securely handled by **AWS CodePipeline**.
 
-
-[![](images/architecture.png)][architecture]
 
 ## Running the example
 
 #### 1. Clone the sample Lambda function GitHub repository
 
-[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS LAMBDA sample application](https://github.com/awslabs/aws-pipeline-to-service-catalog.git) GitHub repository.
+[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS LAMBDA sample application](https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda) CodeCommit repository. You will need to have CodeCommit HTTPS credentials to do this.
 
 From your terminal application, execute the following command:
 
 ```console
-git clone https://github.com/awslabs/aws-pipeline-to-service-catalog.git
+git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda
 ```
 
-This creates a directory named `aws-pipeline-to-service-catalog` in your current directory, which contains the code for the AWS Lambda function sample application.
+This creates a directory named `sample-lambda` in your current directory, which contains the code for the AWS Lambda function sample application.
 
-#### 2. Create [AWS CodeCommit](code-commit-url) repository in Development Account
+#### 2. Create **AWS CodeCommit** repository in Development Account
 
 Follow the [instructions here](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html#getting-started-create-repo) to create a CodeCommit repository
 in the Development Account.Name your repository as sample-lambda
@@ -53,9 +51,3 @@ From your terminal application, execute the following command:
 ```console
 git push AWSCodeCommit master
 ```
-
-[code-commit-url]: https://aws.amazon.com/devops/continuous-delivery/
-[code-build-url]: https://aws.amazon.com/codebuild/
-[code-pipeline-url]: https://aws.amazon.com/codepipeline/
-[clouformation-url]: https://aws.amazon.com/cloudformation/
-[lambda-url]: https://aws.amazon.com/lambda/
