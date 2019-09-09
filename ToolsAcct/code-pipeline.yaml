@@ -125,6 +125,31 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref ProjectName
+  TestProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: !Ref ProjectName
+      Description: !Ref ProjectName
+      EncryptionKey: !Ref CMKARN
+      ServiceRole: !GetAtt BuildProjectRole.Arn
+      Artifacts:
+        Type: CODEPIPELINE
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/python:3.7
+      Source:
+        Type: CODEPIPELINE
+        BuildSpec: |
+          version: 0.1
+          phases:
+            build:
+              commands:
+                - python -m unittest ./scripts/test_module.py
+      TimeoutInMinutes: 10
+      Tags:
+        - Key: Name
+          Value: !Ref ProjectName
   PipeLineRole:
     Type: AWS::IAM::Role
     Properties:
@@ -248,6 +273,21 @@ Resources:
             OutputArtifacts:
               - Name: BuildOutput
             #REMOVE:RoleArn: arn:aws:iam::485873893626:role/ToolsAcctCodePipelineCodeCommitRole
+          
+        - Name: Test
+          Actions:
+            - Name: RunUnitTests
+              ActionTypeId:
+                Category: Test
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref BuildProject
+
+              InputArtifacts:
+                - Name: BuildOutput
+              
         - Name: DeployToTest
           Actions:
             - Name: CreateChangeSetTest
