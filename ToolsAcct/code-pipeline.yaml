@@ -83,6 +83,11 @@ Resources:
               - logs:CreateLogStream
               - logs:PutLogEvents
             Resource: arn:aws:logs:*:*:*
+          -
+            Effect: Allow
+            Action:
+              iam:SimulateCustomPolicy
+            Resource: "*"
       Roles:
         -
           !Ref BuildProjectRole
