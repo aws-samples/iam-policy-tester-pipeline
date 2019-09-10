@@ -157,6 +157,10 @@ Resources:
             install:
               runtime-versions:
                 python: 3.7
+              commands:
+                - printenv
+                - ls -R
+                - pip install -r requirements.txt -t "$PWD"
             build:
               commands:
                 - python -m unittest test_module.py
