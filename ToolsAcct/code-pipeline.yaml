@@ -121,7 +121,9 @@ Resources:
               commands:
                 - aws cloudformation package --template-file lambda-cloudformation.yaml --s3-bucket $S3Bucket --s3-prefix sample-lambda/codebuild --output-template-file samtemplate.yaml
           artifacts:
-            files: samtemplate.yaml
+            files: 
+              - samtemplate.yaml
+              - scripts/*
             discard-paths: yes
 
       TimeoutInMinutes: 10
@@ -152,7 +154,7 @@ Resources:
                 python: 3.7
             build:
               commands:
-                - python -m unittest ./scripts/test_module.py
+                - python -m unittest test_module.py
       TimeoutInMinutes: 10
       Tags:
         - Key: Name
