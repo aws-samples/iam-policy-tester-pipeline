@@ -89,8 +89,9 @@ Resources:
   BuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: !Ref ProjectName
-      Description: !Ref ProjectName
+      Description: !Sub
+        - '${Project}/BuildCBProject'
+        - { Project: !Ref ProjectName }
       EncryptionKey: !Ref CMKARN
       ServiceRole: !GetAtt BuildProjectRole.Arn
       Artifacts:
@@ -128,8 +129,9 @@ Resources:
   TestProject:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: !Ref ProjectName
-      Description: !Ref ProjectName
+      Description: !Sub
+        - '${Project}/TestCBProject'
+        - { Project: !Ref ProjectName }
       EncryptionKey: !Ref CMKARN
       ServiceRole: !GetAtt BuildProjectRole.Arn
       Artifacts:
