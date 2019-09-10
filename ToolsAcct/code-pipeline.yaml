@@ -290,7 +290,7 @@ Resources:
                 Version: 1
                 Provider: CodeBuild
               Configuration:
-                ProjectName: !Ref BuildProject
+                ProjectName: !Ref TestProject
 
               InputArtifacts:
                 - Name: BuildOutput
