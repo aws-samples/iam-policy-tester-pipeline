@@ -37,7 +37,6 @@ Conditions:
   AddCodeBuildResource: !Equals [ !Ref CrossAccountCondition, true ]
 
 Resources:
-
   BuildProjectRole:
     Type: AWS::IAM::Role
     Properties:
@@ -53,6 +52,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Path: /
+
   BuildProjectPolicy:
     Type: AWS::IAM::Policy
     DependsOn: S3BucketPolicy
@@ -86,11 +86,14 @@ Resources:
           -
             Effect: Allow
             Action:
-              iam:SimulateCustomPolicy
+              - iam:SimulateCustomPolicy
+              - iam:SimulatePrincipalPolicy
+
             Resource: "*"
       Roles:
         -
           !Ref BuildProjectRole
+
   BuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -135,6 +138,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref ProjectName
+
   TestProject:
     Type: AWS::CodeBuild::Project
     Properties:
@@ -168,6 +172,7 @@ Resources:
       Tags:
         - Key: Name
           Value: !Ref ProjectName
+
   PipeLineRole:
     Type: AWS::IAM::Role
     Properties:
@@ -183,6 +188,7 @@ Resources:
             Action:
               - sts:AssumeRole
       Path: /
+
   PipelinePolicy:
     Type: AWS::IAM::Policy
     DependsOn: S3BucketPolicy
@@ -245,8 +251,8 @@ Resources:
               - !Sub arn:aws:iam::${TestAccount}:role/ToolsAcctCodePipelineCloudFormationRole
 
       Roles:
-        -
-          !Ref PipeLineRole
+        - !Ref PipeLineRole
+
   Pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
@@ -273,24 +279,22 @@ Resources:
                   - AddCodeBuildResource
                   - !Sub arn:aws:iam::${DevAccount}:role/ToolsAcctCodePipelineCodeCommitRole
                   - !Ref AWS::NoValue
-        -
-          Name: Build
+        - Name: Build
           Actions:
-          -
-            Name: Build
-            ActionTypeId:
-              Category: Build
-              Owner: AWS
-              Version: 1
-              Provider: CodeBuild
-            Configuration:
-              ProjectName: !Ref BuildProject
-            RunOrder: 1
-            InputArtifacts:
-              - Name: SCCheckoutArtifact
-            OutputArtifacts:
-              - Name: BuildOutput
-            #REMOVE:RoleArn: arn:aws:iam::485873893626:role/ToolsAcctCodePipelineCodeCommitRole
+            - Name: Build
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Version: 1
+                Provider: CodeBuild
+              Configuration:
+                ProjectName: !Ref BuildProject
+              RunOrder: 1
+              InputArtifacts:
+                - Name: SCCheckoutArtifact
+              OutputArtifacts:
+                - Name: BuildOutput
+              #REMOVE:RoleArn: arn:aws:iam::485873893626:role/ToolsAcctCodePipelineCodeCommitRole
           
         - Name: Test
           Actions:
@@ -302,7 +306,6 @@ Resources:
                 Provider: CodeBuild
               Configuration:
                 ProjectName: !Ref TestProject
-
               InputArtifacts:
                 - Name: BuildOutput
               
