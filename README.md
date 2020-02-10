@@ -62,11 +62,6 @@ From your terminal application, execute the following command:
 chmod +x single-click-cross-account-pipeline.sh && ./single-click-cross-account-pipeline.sh
 ```
 
-
-## Contributing
-
-## Code of Conduct
-
 ## License
 
 This sample code is made available under a modified MIT license. See the LICENSE file.
