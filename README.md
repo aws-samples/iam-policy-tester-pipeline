@@ -1,24 +1,26 @@
 # Cross Account AWS CodePipeline for IAM Policy Tester
 
-This reference architecture demonstrates how to push code hosted in [AWS CodeCommit](https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda) repository in Development Account,
-use **AWS CodeBuild** to do application build, store the output artifacts in S3Bucket and deploy these artifacts to Test
-and Production Accounts using **AWS CloudFormation**. This orchestration of code movement from code checkin to deployment
-is securely handled by **AWS CodePipeline**.
+This repository accompanies the [IAM Policy Tester Pipeline] blogpost. 
+It contains an example CodePipeline. This pipeline demonstrates the unit testing of an IAM policy to validate permissions in different AWS Accounts.
+
+The same resource, with the same IAM policy attached may not be able authorised for certain actions in an account. External policies, such as SCP's can limit the actions of a resource, despite the IAM policy associated with a resource.
+
+Such conflicts can occur when crossing the boundry from development accounts to production-like accounts that contain further restrictions.
+This pipeline demonstrates how this problem can be detected using `iam policy simulator` to validate if an IAM policy and action is permitted within an account.
 
 
 ## Running the example
 
-#### 1. Clone the sample Lambda function GitHub repository
+#### 1. Clone this repository
 
-[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS LAMBDA sample application](https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda) CodeCommit repository. You will need to have CodeCommit HTTPS credentials to do this.
-
-From your terminal application, execute the following command:
+[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS Policy Tester Pipeline](https://github.com/aws-samples/iam-policy-tester-pipeline) repository. 
 
 ```console
-git clone https://git-codecommit.eu-west-1.amazonaws.com/v1/repos/sample-lambda
+git clone https://github.com/aws-samples/iam-policy-tester-pipeline
 ```
 
-This creates a directory named `sample-lambda` in your current directory, which contains the code for the AWS Lambda function sample application.
+This creates a directory named `iam-policy-tester-pipeline` in your current directory. 
+
 
 #### 2. Create **AWS CodeCommit** repository in Development Account
 
