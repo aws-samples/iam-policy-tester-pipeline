@@ -63,7 +63,7 @@ From your terminal application, back in the `iam-policy-tester-pipeline` directo
 chmod +x single-click-cross-account-pipeline.sh && ./single-click-cross-account-pipeline.sh
 ```
 
-This last step deploys the entire pipeline. It expects to receive the account numbers to which it will deploy the reference architecture. It creates Amazon S3 buckets for the build artifacts and encryption keys for secure cross-account communication, and sets up CodePipeline, CodeBuild, and CodeDeploy in the account structure described above. After this step, each update in the sample-lambda repository triggers an execution of the pipeline.
+This last step deploys the entire pipeline. It expects to receive the account numbers to which it will deploy the reference architecture. It creates Amazon S3 buckets for the build artifacts and encryption keys for secure cross-account communication, and sets up CodePipeline, CodeBuild, and CodeDeploy in the account structure described above. After this step, each update in the sample-lambda repository triggers an execution of the pipeline. You can manually release a change in the pipeline after deploying it to ensure it is working.
 
 ## License
 
