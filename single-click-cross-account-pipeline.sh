@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 #  Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #  Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with
 #  the License. A copy of the License is located at
@@ -11,28 +10,28 @@
 
 echo -n "Enter ToolsAccount > "
 read ToolsAccount
-#168260405049
+
 echo -n "Enter ToolsAccount ProfileName for AWS Cli operations> "
 read ToolsAccountProfile
-#iampolicytester
+
 echo -n "Enter Dev Account > "
 read DevAccount
-#168260405049
+
 echo -n "Enter DevAccount ProfileName for AWS Cli operations> "
 read DevAccountProfile
-#iampolicytester
+
 echo -n "Enter Test Account > "
 read TestAccount
-#168260405049
+
 echo -n "Enter TestAccount ProfileName for AWS Cli operations> "
 read TestAccountProfile
-#iampolicytester
+
 echo -n "Enter Prod Account > "
 read ProdAccount
-#688437181797
+
 echo -n "Enter ProdAccount ProfileName for AWS Cli operations> "
 read ProdAccountProfile
-#iampolicytesterprod
+
 
 aws cloudformation deploy --stack-name pre-reqs --template-file Pipeline/ToolsAcct/pre-reqs.yaml --parameter-overrides DevAccount=$DevAccount TestAccount=$TestAccount ProductionAccount=$ProdAccount --profile $ToolsAccountProfile
 echo -n "Enter S3 Bucket created from above > "

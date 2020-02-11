@@ -45,7 +45,11 @@ git init && git remote add AWSCodeCommit HTTP_CLONE_URL_FROM_STEP_2
 
 Follow the instructions [here](http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) for local git setup required to push code to CodeCommit repository.
 
-#### 4. Push the code AWS CodeCommit
+#### 4. Replace the Policy Source ARN
+
+You need to specify the user, group, or role whose policies you want to include in the simulation. To do this, within the `sample-lambda` directory, modify the value in `scripts/source.txt` file.
+
+#### 5. Push the code AWS CodeCommit
 
 From your terminal application, execute the following commands:
 
@@ -55,7 +59,7 @@ git commit -am "Initialise the SampleLambda repository"
 git push AWSCodeCommit master
 ```
 
-#### 5. Run the script to generate the Cross Account Pipeline
+#### 6. Run the script to generate the Cross Account Pipeline
 
 From your terminal application, back in the `iam-policy-tester-pipeline` directory, execute the following command:
 
