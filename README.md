@@ -13,54 +13,57 @@ This pipeline demonstrates how this problem can be detected using `iam policy si
 
 #### 1. Clone this repository
 
-[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS Policy Tester Pipeline](https://github.com/aws-samples/iam-policy-tester-pipeline) repository. 
+[Clone](https://help.github.com/articles/cloning-a-repository/) the [AWS Policy Tester Pipeline](https://github.com/aws-samples/iam-policy-tester-pipeline) repository. From your terminal application, execute the following command:
 
 ```console
 git clone https://github.com/aws-samples/iam-policy-tester-pipeline
 ```
 
-This creates a directory named `iam-policy-tester-pipeline` in your current directory. 
+This creates a directory named `iam-policy-tester-pipeline` in your current directory.
 
 
 #### 2. Create **AWS CodeCommit** repository in Development Account
 
-Follow the [instructions here](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html#getting-started-create-repo) to create a CodeCommit repository
-in the Development Account.Name your repository as sample-lambda
-
-Alternatively, from your terminal application, execute the following command. You may refer [here](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-create-repository.html#how-to-create-repository-cli)
-on further details, in order to setup AWS Cli , if required.
+Follow the [instructions here](http://docs.aws.amazon.com/codecommit/latest/userguide/getting-started.html#getting-started-create-repo) to create a CodeCommit repository in the Development Account. Name your repository as sample-lambda.  Alternatively, from your terminal application, execute the following command.
 
 ```console
 aws codecommit create-repository --repository-name sample-lambda --repository-description "Sample Lambda Function"
 ```
 
-Note the cloneUrlHttp URL in the response from above CLI.
+Note the `cloneUrlHttp` URL in the response from above CLI.
+
+You may refer [here (http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-create-repository.html#how-to-create-repository-cli)
+on further details, in order to setup AWS Cli , if required.
 
 #### 3. Add a new remote
 
-From your terminal application, execute the following command:
+From your terminal application, within the `sample-lambda` directory, execute the following command:
 
 ```console
-git remote add AWSCodeCommit HTTP_CLONE_URL_FROM_STEP_2
+git init && git remote add AWSCodeCommit HTTP_CLONE_URL_FROM_STEP_2
 ```
 
 Follow the instructions [here](http://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html) for local git setup required to push code to CodeCommit repository.
 
 #### 4. Push the code AWS CodeCommit
 
-From your terminal application, execute the following command:
+From your terminal application, execute the following commands:
 
 ```console
+git add *
+git commit -am "Initialise the SampleLambda repository"
 git push AWSCodeCommit master
 ```
 
 #### 5. Run the script to generate the Cross Account Pipeline
 
-From your terminal application, execute the following command:
+From your terminal application, back in the `iam-policy-tester-pipeline` directory, execute the following command:
 
 ```console
 chmod +x single-click-cross-account-pipeline.sh && ./single-click-cross-account-pipeline.sh
 ```
+
+This last step deploys the entire pipeline. It expects to receive the account numbers to which it will deploy the reference architecture. It creates Amazon S3 buckets for the build artifacts and encryption keys for secure cross-account communication, and sets up CodePipeline, CodeBuild, and CodeDeploy in the account structure described above. After this step, each update in the sample-lambda repository triggers an execution of the pipeline. You can manually release a change in the pipeline after deploying it to ensure it is working.
 
 ## License
 
