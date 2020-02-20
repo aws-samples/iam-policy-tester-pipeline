@@ -7,7 +7,7 @@
 #  limitations under the License.
 
 AWSTemplateFormatVersion: '2010-09-09'
-Description: CodePipeline for the Sample Lambda Function
+Description: CodePipeline for the Sample Lambda Function (uksb-1qfmusbr5)
 Parameters:
   ProjectName:
     Description: Name of the Project
