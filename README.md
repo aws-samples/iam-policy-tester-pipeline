@@ -1,7 +1,7 @@
 # Cross Account AWS CodePipeline for IAM Policy Tester
 
 This repository accompanies the [IAM Policy Tester Pipeline]() blogpost. 
-It contains an example CodePipeline. This pipeline demonstrates the unit testing of an IAM policy to validate permissions in different AWS Accounts.
+It contains an example of a secure, cross-account, continous delivery [CodePipeline](https://aws.amazon.com/blogs/devops/aws-building-a-secure-cross-account-continuous-delivery-pipeline/). This pipeline demonstrates the unit testing of an IAM policy to validate permissions in different AWS Accounts.
 
 The same resource, with the same IAM policy attached may not be able authorised for certain actions in an account. External policies, such as SCP's can limit the actions of a resource, despite the IAM policy associated with a resource.
 
