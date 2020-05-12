@@ -273,7 +273,6 @@ Resources:
               OutputArtifacts:
                 - Name: SCCheckoutArtifact
               RunOrder: 1
-              #RoleArn: !Sub arn:aws:iam::${DevAccount}:role/ToolsAcctCodePipelineCodeCommitRole
               RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -294,7 +293,6 @@ Resources:
                 - Name: SCCheckoutArtifact
               OutputArtifacts:
                 - Name: BuildOutput
-              #REMOVE:RoleArn: arn:aws:iam::485873893626:role/ToolsAcctCodePipelineCodeCommitRole
           
         - Name: Test
           Actions:
@@ -323,7 +321,6 @@ Resources:
                 StackName: sample-lambda-dev
                 Capabilities: CAPABILITY_NAMED_IAM
                 TemplatePath: BuildOutput::samtemplate.yaml
-                #RoleArn: !Sub arn:aws:iam::${TestAccount}:role/cloudformationdeployer-role
                 RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -332,7 +329,6 @@ Resources:
               InputArtifacts:
                 - Name: BuildOutput
               RunOrder: 1
-              #RoleArn: !Sub arn:aws:iam::${TestAccount}:role/ToolsAcctCodePipelineCloudFormationRole
               RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -348,7 +344,6 @@ Resources:
                 ChangeSetName: sample-lambda-dev
                 ActionMode: CHANGE_SET_EXECUTE
                 StackName: sample-lambda-dev
-                #RoleArn: !Sub arn:aws:iam::${TestAccount}:role/cloudformationdeployer-role
                 RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -357,7 +352,6 @@ Resources:
               InputArtifacts:
                 - Name: BuildOutput
               RunOrder: 2
-              #RoleArn: !Sub arn:aws:iam::${TestAccount}:role/ToolsAcctCodePipelineCloudFormationRole
               RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -377,7 +371,6 @@ Resources:
                 StackName: sample-lambda-test
                 Capabilities: CAPABILITY_NAMED_IAM
                 TemplatePath: BuildOutput::samtemplate.yaml
-                #RoleArn: !Sub arn:aws:iam::${ProductionAccount}:role/cloudformationdeployer-role
                 RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -386,7 +379,6 @@ Resources:
               InputArtifacts:
                 - Name: BuildOutput
               RunOrder: 1
-              #RoleArn: !Sub arn:aws:iam::${ProductionAccount}:role/ToolsAcctCodePipelineCloudFormationRole
               RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -402,7 +394,6 @@ Resources:
                 ChangeSetName: sample-lambda-test
                 ActionMode: CHANGE_SET_EXECUTE
                 StackName: sample-lambda-test
-                #RoleArn: !Sub arn:aws:iam::${ProductionAccount}:role/cloudformationdeployer-role
                 RoleArn:
                   Fn::If:
                   - AddCodeBuildResource
@@ -411,7 +402,6 @@ Resources:
               InputArtifacts:
                 - Name: BuildOutput
               RunOrder: 2
-              #RoleArn: !Sub arn:aws:iam::${ProductionAccount}:role/ToolsAcctCodePipelineCloudFormationRole
               RoleArn:
                 Fn::If:
                 - AddCodeBuildResource
