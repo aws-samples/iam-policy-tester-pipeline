@@ -47,7 +47,7 @@ Follow the instructions [here](http://docs.aws.amazon.com/codecommit/latest/user
 
 #### 4. Replace the Policy Source ARN
 
-You need to specify the user, group, or role whose policies you want to include in the simulation. To do this, within the `sample-lambda` directory, modify the value in `scripts/source.txt` file.
+You need to specify the user, group, or role whose policies you want to include in the simulation. To do this, within the `SampleLambda` directory, modify the value in `scripts/source.txt` file.
 
 #### 5. Push the code AWS CodeCommit
 
