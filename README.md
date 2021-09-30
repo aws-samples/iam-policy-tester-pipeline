@@ -37,7 +37,7 @@ on further details, in order to setup AWS Cli , if required.
 
 #### 3. Add a new remote
 
-From your terminal application, within the `sample-lambda` directory, execute the following command:
+From your terminal application, within the `SampleLambda` directory, execute the following command:
 
 ```console
 git init && git remote add AWSCodeCommit HTTP_CLONE_URL_FROM_STEP_2
